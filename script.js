@@ -394,11 +394,7 @@
   const form = document.getElementById("appointmentForm");
   const formSuccess = document.getElementById("formSuccess");
 
-  function encode(data) {
-    return Object.keys(data)
-      .map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]))
-      .join("&");
-  }
+  
 
   if (form) {
     /* Prevent past dates on the date picker */
@@ -409,8 +405,7 @@
     }
 
     form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
+      
       /* Native HTML5 validation */
       if (!form.checkValidity()) {
         form.reportValidity();
@@ -426,28 +421,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
-      /* Submit to Netlify Forms via AJAX so we can show an in-page success message */
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode(data)
-      })
-        .then(() => {
-          if (formSuccess) formSuccess.classList.add("show");
-          form.reset();
-          submitBtn.textContent = "Sent ✓";
-          setTimeout(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-            if (formSuccess) formSuccess.classList.remove("show");
-          }, 6000);
-        })
-        .catch(() => {
-          /* Fallback: allow native submission */
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-          alert("Something went wrong. Please call us at +91 73959 29416.");
-        });
+      
     });
   }
 
