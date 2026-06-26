@@ -529,3 +529,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
 }
+@media (max-width: 768px) {
+  .hero-inner {
+    padding-top: 100px;
+  }
+}
